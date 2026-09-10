@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>English Class • Anime Presentation Viewer</title>
+<style>
+:root{
+  --bg:#07111f; --panel:#0d1c31; --panel2:#10243d; --line:#21405f;
+  --text:#f7fbff; --muted:#9db4cd; --blue:#43a7ff; --cyan:#6ce7ff;
+  --pink:#ff86c8; --yellow:#ffd66b; --shadow:0 18px 50px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:
+ radial-gradient(circle at 15% 15%,rgba(67,167,255,.13),transparent 30%),
+ radial-gradient(circle at 85% 20%,rgba(255,134,200,.10),transparent 25%),var(--bg);color:var(--text)}
+button{font:inherit}
+body{overflow-x:hidden}
+#particles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.petal{position:absolute;width:10px;height:15px;border-radius:80% 20% 80% 20%;background:rgba(255,150,205,.65);
+ animation:fall linear infinite;filter:blur(.1px)}
+.star{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff;animation:twinkle 2.5s ease-in-out infinite}
+@keyframes fall{from{transform:translate3d(0,-10vh,0) rotate(0)}to{transform:translate3d(180px,110vh,0) rotate(520deg)}}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.35)}}
+header{height:72px;border-bottom:1px solid rgba(110,180,240,.18);background:rgba(7,17,31,.88);backdrop-filter:blur(18px);
+ display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:13px}.brandIcon{width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,#fff,#d9efff);
+ display:grid;place-items:center;color:#1765a7;font-size:23px;box-shadow:0 7px 24px rgba(67,167,255,.22)}
+.brand strong{font-size:20px;display:block}.brand span{font-size:12px;color:#7fc8ff}
+.slogan{font-family:Georgia,serif;font-style:italic;color:#b9d6ef;font-size:13px}
+main{position:relative;z-index:1}
+.home{max-width:1450px;margin:auto;padding:38px 34px 60px}
+.heroGrid{display:grid;grid-template-columns:260px 1fr 250px;gap:26px;align-items:center}
+.heroTitle h1{font-size:42px;line-height:1.05;margin:0 0 16px;letter-spacing:-1.5px}
+.heroTitle h1 span{color:var(--blue)}.heroTitle p{color:#c0d2e6;line-height:1.6;font-size:14px}
+.primary{border:0;border-radius:13px;padding:13px 20px;color:white;background:linear-gradient(100deg,#208ef3,#54b6ff);
+ cursor:pointer;font-weight:800;box-shadow:0 12px 30px rgba(32,142,243,.25);transition:.25s}
+.primary:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(32,142,243,.35)}
+.animeScene{height:255px;position:relative;overflow:hidden;border-radius:26px;border:1px solid #1f466a;
+ background:linear-gradient(#142e4c 0%,#244a6a 45%,#f4c7a4 100%);box-shadow:var(--shadow)}
+.sun{position:absolute;width:100px;height:100px;border-radius:50%;background:#ffd66b;right:13%;top:25px;filter:blur(.3px);box-shadow:0 0 45px #ffd66b}
+.cloud{position:absolute;background:#fff;border-radius:50px;opacity:.78;filter:blur(1px);width:110px;height:25px;top:45px;left:10%;animation:cloud 14s linear infinite}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}.cloud:before{width:42px;height:42px;left:18px;top:-20px}.cloud:after{width:55px;height:55px;right:15px;top:-30px}
+@keyframes cloud{from{transform:translateX(-30px)}to{transform:translateX(420px)}}
+.hill{position:absolute;bottom:-40px;width:75%;height:120px;background:#193f45;border-radius:50% 50% 0 0;left:-10%;transform:rotate(-4deg)}
+.hill2{position:absolute;bottom:-50px;width:80%;height:125px;background:#102d38;border-radius:50% 50% 0 0;right:-12%;transform:rotate(6deg)}
+.animeGirl{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:155px;height:220px;animation:floaty 3s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+@keyframes waveArm{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(-30deg) translateY(-3px)}}
+.head{position:absolute;left:45px;top:20px;width:68px;height:73px;border-radius:48% 48% 46% 46%;background:#ffd7bd;z-index:3}
+.hair{position:absolute;left:31px;top:5px;width:95px;height:100px;background:#1a2134;border-radius:55% 55% 35% 35%;z-index:4}
+.faceCut{position:absolute;left:45px;top:48px;width:68px;height:48px;background:#ffd7bd;border-radius:0 0 45% 45%;z-index:5}
+.eye{position:absolute;top:72px;width:7px;height:10px;background:#263b60;border-radius:50%;z-index:7}.eye.l{left:61px}.eye.r{left:91px}
+.mouth{position:absolute;left:76px;top:91px;width:10px;height:5px;border-bottom:2px solid #c36b78;border-radius:50%;z-index:7}
+.head:before,.head:after{content:"";position:absolute;top:28px;width:9px;height:18px;background:#f39bb0;border-radius:50%;opacity:.48}
+.head:before{left:7px}.head:after{right:7px}
+.hair:before,.hair:after{content:"";position:absolute;width:18px;height:55px;background:#1a2134;border-radius:50%;top:48px}
+.hair:before{left:-9px;transform:rotate(9deg)}.hair:after{right:-9px;transform:rotate(-9deg)}
+.ribbon{position:absolute;left:103px;top:31px;width:35px;height:20px;background:#ff86c8;clip-path:polygon(0 0,100% 20%,65% 50%,100% 100%,0 80%,25% 50%);z-index:8}
+.body{position:absolute;left:38px;bottom:0;width:80px;height:125px;background:#edf6ff;border-radius:38px 38px 0 0;z-index:2}
+.tie{position:absolute;left:72px;bottom:88px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:28px solid #43a7ff;z-index:6}
+.arm{position:absolute;width:25px;height:90px;background:#ffd7bd;border-radius:18px;z-index:1;bottom:30px}.arm.l{left:28px;transform:rotate(18deg)}.arm.r{left:104px;transform:rotate(-18deg);animation:waveArm 2.8s ease-in-out infinite}
+.book{position:absolute;left:70px;bottom:23px;width:50px;height:31px;background:#ffcf6a;transform:rotate(-8deg);z-index:7;border-radius:3px;box-shadow:0 4px 8px #0004}
+.book:after{content:"A+";position:absolute;inset:5px;text-align:center;color:#7b4d19;font-weight:900}
+.cardRow{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.lessonCard{background:linear-gradient(150deg,rgba(16,36,61,.94),rgba(9,25,42,.94));border:1px solid #204565;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:.3s}
+.lessonCard:hover{transform:translateY(-6px);border-color:#438dcc}
+.cardPreview{height:185px;position:relative;overflow:hidden;background:#152d44}
+.cardPreview img{width:100%;height:100%;object-fit:cover;display:block;transition:.5s}.lessonCard:hover img{transform:scale(1.045)}
+.previewGlow{position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,17,31,.55),transparent 55%)}
+.badge{position:absolute;left:15px;top:13px;padding:6px 9px;border-radius:99px;background:#07111fcc;border:1px solid #ffffff25;font-size:11px}
+.cardBody{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.cardBody h2{margin:0 0 4px;font-size:18px}.cardBody p{margin:0;color:#93b1cc;font-size:13px}
+.how{background:rgba(10,27,46,.86);border:1px solid #204565;border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.how h3{margin:0 0 17px;font-size:16px}.step{display:flex;gap:12px;margin:14px 0;color:#c7d9eb;font-size:12px;line-height:1.4}.num{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#208ef3;font-weight:900}
+.viewer{display:none;min-height:calc(100vh - 72px);padding:14px 16px 24px}
+.viewer.active{display:block}.viewerTop{height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 4px 10px}
+.back{background:none;border:0;color:#c8ddf0;cursor:pointer}.viewerTitle{font-size:14px;color:#dcecff}.viewerTitle span{color:#7fa2bf}
+.viewerLayout{display:grid;grid-template-columns:130px 1fr 190px;gap:10px;min-height:calc(100vh - 145px)}
+.side,.thumbs{background:rgba(10,27,46,.88);border:1px solid #1c3c5b;border-radius:10px;padding:9px}
+.sideBrand{font-weight:800;font-size:11px;margin:5px 4px 12px;color:#dcecff}.deckBtn{width:100%;border:1px solid transparent;background:transparent;color:#b9cce0;padding:7px;border-radius:8px;text-align:left;cursor:pointer;font-size:10px;margin-bottom:6px}
+.deckBtn.active{background:#208ef3;color:#fff}.deckBtn img{width:100%;height:50px;object-fit:cover;border-radius:5px;display:block;margin-bottom:5px}
+.stage{background:#06101d;border:1px solid #1b3853;border-radius:10px;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.stageTop{height:38px;padding:0 10px;display:flex;justify-content:flex-end;align-items:center;color:#abc4dc;font-size:10px}
+.stageImgWrap{flex:1;display:grid;place-items:center;padding:4px 8px}.stageImg{max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;box-shadow:0 10px 30px #0007;transition:opacity .18s,transform .18s}
+.stageImg.swap{opacity:0;transform:scale(.985)}
+.controls{height:48px;border-top:1px solid #1b3853;display:flex;align-items:center;gap:9px;padding:0 10px}
+.ctrl{border:0;background:#17314d;color:#d9ebfa;border-radius:9px;padding:8px 12px;cursor:pointer}.ctrl:hover{background:#224b70}
+.progress{height:4px;background:#183149;border-radius:99px;flex:1;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#43a7ff,#6ce7ff);width:20%;transition:.3s}
+.counter{font-size:10px;color:#8ea9c2}.thumbs h4{margin:4px 4px 10px;font-size:11px}.thumb{border:1px solid transparent;border-radius:7px;padding:3px;margin-bottom:7px;cursor:pointer;background:#0b2035}.thumb.active{border-color:#43a7ff;background:#123c61}.thumb img{width:100%;height:62px;object-fit:cover;border-radius:4px;display:block}.thumb p{font-size:9px;margin:4px;color:#b6cde1}
+.full{position:fixed;right:18px;bottom:18px;z-index:50;border:1px solid #315575;background:#102b46;color:white;border-radius:99px;padding:11px 15px;cursor:pointer;box-shadow:var(--shadow)}
+.modalHint{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);padding:8px 13px;border-radius:99px;background:#0c2138e8;border:1px solid #244765;color:#9fb9d0;font-size:11px;z-index:50;opacity:.9}
+
+.sceneLabel{position:absolute;left:16px;top:14px;z-index:12;padding:7px 10px;border-radius:999px;
+background:rgba(5,18,32,.48);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(7px);
+font-size:9px;font-weight:900;letter-spacing:1px;color:#fff;animation:labelPulse 3s ease-in-out infinite}
+@keyframes labelPulse{0%,100%{transform:translateY(0);opacity:.88}50%{transform:translateY(-2px);opacity:1}}
+.speedLines{position:absolute;inset:0;z-index:1;opacity:.16;
+background:repeating-linear-gradient(105deg,transparent 0 38px,rgba(255,255,255,.55) 39px 40px,transparent 41px 78px);
+animation:speed 12s linear infinite}
+@keyframes speed{from{transform:translateX(-80px)}to{transform:translateX(80px)}}
+.animeScene:after{content:"";position:absolute;inset:auto 0 0;height:75px;z-index:9;
+background:linear-gradient(transparent,rgba(4,15,26,.48));pointer-events:none}
+.cardPreview:after{content:"";position:absolute;inset:-30% -60%;
+background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 48%,transparent 60%);
+transform:translateX(-35%);animation:shine 6s ease-in-out infinite;pointer-events:none}
+@keyframes shine{0%,55%{transform:translateX(-55%)}80%,100%{transform:translateX(55%)}}
+.lessonCard{position:relative}
+.lessonCard:before{content:"";position:absolute;inset:-1px;border-radius:18px;padding:1px;
+background:linear-gradient(120deg,transparent,#43a7ff55,transparent,#ff86c855,transparent);
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;animation:borderFlow 5s linear infinite}
+@keyframes borderFlow{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(90deg)}}
+.primary{position:relative;overflow:hidden}
+.primary:after{content:"";position:absolute;top:0;left:-80%;width:55%;height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-18deg);animation:buttonShine 4.5s infinite}
+@keyframes buttonShine{0%,60%{left:-80%}80%,100%{left:140%}}
+.stageImg{animation:slideFloat 5s ease-in-out infinite}
+@keyframes slideFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.viewer.active .viewerLayout{animation:viewerIn .45s ease both}
+@keyframes viewerIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
+
+@media(max-width:1050px){.heroGrid{grid-template-columns:220px 1fr}.how{display:none}.viewerLayout{grid-template-columns:105px 1fr 155px}}
+@media(max-width:760px){header{padding:0 14px}.slogan{display:none}.home{padding:25px 14px}.heroGrid{grid-template-columns:1fr}.animeScene{height:220px}.heroTitle h1{font-size:34px}.cardRow{grid-template-columns:1fr}.viewer{padding:8px}.viewerLayout{grid-template-columns:1fr}.side,.thumbs{display:none}.stage{min-height:70vh}}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+<header>
+  <div class="brand"><div class="brandIcon">📖</div><div><strong>English Class</strong><span>Anime Presentation Viewer</span></div></div>
+  <div class="slogan">Learn • Imagine • Present • Shine ✨</div>
+</header>
+
+<main>
+<section id="home" class="home">
+  <div class="heroGrid">
+    <div class="heroTitle">
+      <h1>Welcome to the<br><span>English Presentation</span><br>Viewer</h1>
+      <p>Explore your English lessons with animated anime-style visuals and easy-to-use presentation controls.</p>
+      <div style="font-size:11px;color:#6ce7ff;margin:10px 0 14px">● LIVE CLASS MODE <span style="color:#86a6bf">• smooth transitions • fullscreen ready</span></div>
+      <button class="primary" onclick="openDeck('listening')">▶ Select a Presentation</button>
+    </div>
+
+    <div class="animeScene" aria-label="Original anime-style classroom scene">
+      <div class="sceneLabel">ENGLISH CLASS • LET'S LEARN ✨</div>
+      <div class="speedLines"></div>
+      <div class="sun"></div><div class="cloud"></div><div class="hill"></div><div class="hill2"></div>
+      <div class="animeGirl">
+        <div class="hair"></div><div class="head"></div><div class="faceCut"></div>
+        <div class="eye l"></div><div class="eye r"></div><div class="mouth"></div><div class="ribbon"></div>
+        <div class="body"></div><div class="tie"></div><div class="arm l"></div><div class="arm r"></div><div class="book"></div>
+      </div>
+    </div>
+
+    <div class="how">
+      <h3>✨ How to Use</h3>
+      <div class="step"><div class="num">1</div><div><b>Select a presentation</b><br>from the home screen.</div></div>
+      <div class="step"><div class="num">2</div><div><b>Click View Slides</b><br>to start the lesson.</div></div>
+      <div class="step"><div class="num">3</div><div><b>Use ← → or Space</b><br>to change slides.</div></div>
+      <div class="step"><div class="num">4</div><div><b>Click Fullscreen</b><br>for the class monitor.</div></div>
+    </div>
+  </div>
+
+  <div class="cardRow">
+    <article class="lessonCard">
+      <div class="cardPreview"><img src="decks/listening/slide-1.png"><div class="previewGlow"></div><div class="badge">🎧 PROSE • 5 SLIDES</div></div>
+      <div class="cardBody"><div><h2>📘 Listening</h2><p>— Robin Sharma</p></div><button class="primary" onclick="openDeck('listening')">View Slides →</button></div>
+    </article>
+    <article class="lessonCard">
+      <div class="cardPreview"><img src="decks/magi/slide-1.png"><div class="previewGlow"></div><div class="badge">🎁 STORY • 5 SLIDES</div></div>
+      <div class="cardBody"><div><h2>📕 The Gift of the Magi</h2><p>— O. Henry</p></div><button class="primary" onclick="openDeck('magi')">View Slides →</button></div>
+    </article>
+  </div>
+</section>
+
+<section id="viewer" class="viewer">
+  <div class="viewerTop">
+    <button class="back" onclick="goHome()">← Back to lessons</button>
+    <div class="viewerTitle" id="viewerTitle">Listening <span>— Robin Sharma</span></div>
+    <div class="counter" id="topCounter">1 / 5</div>
+  </div>
+  <div class="viewerLayout">
+    <aside class="side">
+      <div class="sideBrand">📖 English Class</div>
+      <button class="deckBtn" id="deckListening" onclick="openDeck('listening')"><img src="decks/listening/slide-1.png">Listening<br><span>Robin Sharma</span></button>
+      <button class="deckBtn" id="deckMagi" onclick="openDeck('magi')"><img src="decks/magi/slide-1.png">The Gift of the Magi<br><span>O. Henry</span></button>
+    </aside>
+    <div class="stage" id="stage">
+      <div class="stageTop"><button class="ctrl" onclick="toggleFullscreen()">⛶ Fullscreen</button></div>
+      <div class="stageImgWrap"><img id="stageImg" class="stageImg" src="" alt="Presentation slide"></div>
+      <div class="controls">
+        <button class="ctrl" onclick="prev()">←</button>
+        <div class="counter" id="bottomCounter">1 / 5</div>
+        <div class="progress"><i id="bar"></i></div>
+        <button class="ctrl" onclick="next()">→</button>
+        <button class="ctrl" onclick="toggleFullscreen()">⛶</button>
+      </div>
+    </div>
+    <aside class="thumbs"><h4>Slides</h4><div id="thumbList"></div></aside>
+  </div>
+</section>
+</main>
+
+<button class="full" id="floatingFull" onclick="toggleFullscreen()" style="display:none">⛶ Fullscreen</button>
+<div class="modalHint" id="hint" style="display:none">Keyboard: ← → / Space • Home / End • F = fullscreen</div>
+
+<script>
+const decks={
+ listening:{title:"Listening",author:"Robin Sharma",folder:"listening"},
+ magi:{title:"The Gift of the Magi",author:"O. Henry",folder:"magi"}
+};
+let current='listening', index=0, count=5;
+
+function imgPath(deck,n){return `decks/${decks[deck].folder}/slide-${n}.png`}
+function openDeck(deck){
+  current=deck; index=0;
+  document.getElementById('home').style.display='none';
+  document.getElementById('viewer').classList.add('active');
+  document.getElementById('floatingFull').style.display='block';
+  document.getElementById('hint').style.display='block';
+  document.getElementById('viewerTitle').innerHTML=`${decks[deck].title} <span>— ${decks[deck].author}</span>`;
+  document.querySelectorAll('.deckBtn').forEach(x=>x.classList.remove('active'));
+  document.getElementById(deck==='listening'?'deckListening':'deckMagi').classList.add('active');
+  buildThumbs(); render();
+}
+function buildThumbs(){
+  const box=document.getElementById('thumbList'); box.innerHTML='';
+  for(let n=1;n<=count;n++){
+    const d=document.createElement('div'); d.className='thumb';
+    d.innerHTML=`<img src="${imgPath(current,n)}"><p>${n}. Slide ${n}</p>`;
+    d.onclick=()=>{index=n-1;render()};
+    box.appendChild(d);
+  }
+}
+function render(){
+  const im=document.getElementById('stageImg');
+  im.classList.add('swap');
+  setTimeout(()=>{im.src=imgPath(current,index+1); im.onload=()=>im.classList.remove('swap')},120);
+  const text=`${index+1} / ${count}`;
+  document.getElementById('topCounter').textContent=text;
+  document.getElementById('bottomCounter').textContent=text;
+  document.getElementById('bar').style.width=((index+1)/count*100)+'%';
+  [...document.querySelectorAll('.thumb')].forEach((x,i)=>x.classList.toggle('active',i===index));
+}
+function next(){index=(index+1)%count;render()}
+function prev(){index=(index-1+count)%count;render()}
+function goHome(){document.getElementById('viewer').classList.remove('active');document.getElementById('home').style.display='block';document.getElementById('floatingFull').style.display='none';document.getElementById('hint').style.display='none'}
+async function toggleFullscreen(){
+  const el=document.getElementById('stage');
+  if(!document.fullscreenElement) await el.requestFullscreen?.(); else await document.exitFullscreen?.();
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('viewer').classList.contains('active')) return;
+  if(e.key==='ArrowRight'||e.key===' ') {e.preventDefault();next()}
+  if(e.key==='ArrowLeft'){e.preventDefault();prev()}
+  if(e.key==='Home'){index=0;render()}
+  if(e.key==='End'){index=count-1;render()}
+  if(e.key.toLowerCase()==='f')toggleFullscreen();
+});
+function particles(){
+  const root=document.getElementById('particles');
+  for(let i=0;i<24;i++){
+    const p=document.createElement('div');p.className=i%3===0?'star':'petal';
+    p.style.left=Math.random()*100+'%';p.style.top=(Math.random()*100-100)+'%';
+    p.style.animationDuration=(7+Math.random()*9)+'s';p.style.animationDelay=(-Math.random()*12)+'s';
+    root.appendChild(p);
+  }
+}
+particles();
+</script>
+</body>
+</html>
